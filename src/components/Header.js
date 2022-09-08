@@ -23,9 +23,8 @@ const Headeing = styled(Grid)(({theme})=>({
 const AuthBtn = styled(Button)`
     outline: none;
     background: green;    
-    padding: 15px 20px;
+    padding: 5px 15px;
     cursor: pointer;
-    font-size: 18px;
     font-weight: 500;
     border-radius: 5px;
     & a{
