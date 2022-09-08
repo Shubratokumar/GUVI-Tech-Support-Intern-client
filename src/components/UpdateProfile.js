@@ -1,10 +1,116 @@
-import React from 'react';
+import React, { useState } from 'react';
+import "./../styles/auth.css"
+import { useNavigate } from 'react-router-dom';
 
 const UpdateProfile = () => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [gender, setGender] = useState("");
+    const [dob, setDoB] = useState("");
+    const [age, setAge] = useState("");
+    const [phone, setPhone] = useState("");
+    const navigate = useNavigate();
+
+    const handleNameBlur = (e) =>{
+        setName(e.target.value);
+    };
+    const handleEmailBlur = (e) => {
+        setEmail(e.target.value);
+    };
+    const handleGenderBlur = (e) => {
+        setGender(e.target.value);
+    };
+    const handleDoBBlur = (e) => {
+        setDoB(e.target.value);
+    }; 
+    const handleAgeBlur = (e) => {
+        setAge(e.target.value);
+    }; 
+    const handlePhoneBlur = (e) => {
+        setPhone(e.target.value);
+    }; 
+
+    const handleProfileUpdate = (event) => {
+        event.preventDefault();
+        navigate("/");
+    }
     return (
-        <div>
-            Update your profile
-        </div>
+        <div className="form-container">
+      <div>
+        <h1 className="form-title" >Update Profile</h1>
+        <form onSubmit={handleProfileUpdate}>
+          <div className="input-group">
+            <label htmlFor="name">Your Name</label>
+            <div>
+              <input
+                onBlur={handleNameBlur}
+                type="text"
+                name="name"
+                required
+              />
+            </div>
+          </div>
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <div>
+              <input
+                onBlur={handleEmailBlur}
+                type="email"
+                name="email"
+                required
+              />
+            </div>
+          </div>
+          <div className="input-group">
+            <label htmlFor="gender">Gender</label>
+            <div>
+              <input
+                onBlur={handleGenderBlur}
+                type="text"
+                name="gender"
+                required
+              />
+            </div>
+          </div>
+          <div className="input-group">
+            <label htmlFor="dob">DoB</label>
+            <div>
+              <input
+                onBlur={handleDoBBlur}
+                type="date"
+                name="dob"
+                required
+              />
+            </div>
+          </div>
+          <div className="input-group">
+            <label htmlFor="age">Age</label>
+            <div>
+              <input
+                onBlur={handleAgeBlur}
+                type="text"
+                name="age"
+                required
+              />
+            </div>
+          </div>
+          <div className="input-group">
+            <label htmlFor="phone">Phone</label>
+            <div>
+              <input
+                onBlur={handlePhoneBlur}
+                type="number"
+                name="phone"
+                required
+              />
+            </div>
+          </div>
+          <button type="submit" className="form-submit">
+                Update
+          </button>
+        </form>
+      </div>
+    </div>
     );
 };
 
