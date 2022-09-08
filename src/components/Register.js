@@ -28,10 +28,11 @@ const Register = () => {
 
     const handleRegister = async(event) => {
         event.preventDefault();
+
         if(email && password && confirmPassword === password){
             await createUserWithEmailAndPassword(email, password);
             navigate("/");
-        }
+          }
     }
   return (
     <div className="form-container">

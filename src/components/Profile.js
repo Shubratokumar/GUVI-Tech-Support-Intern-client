@@ -49,7 +49,6 @@ const Profile = () => {
         } = useQuery("user", () =>
         fetch(`http://localhost:5000/user/${email}`).then((res) => res.json())
         );
-        console.log(data);
 
         if(isLoading){
             return <Loader />
@@ -68,7 +67,7 @@ const Profile = () => {
                             Name : { data.name ? data.name : "Please update your name."}
                         </ProfileInfoText>
                         <ProfileInfoText> 
-                            Email : { data.email ? data.email : email }
+                            Email : { email }
                         </ProfileInfoText>
                         <ProfileInfoText> 
                             Gender : {data.gender ? data.gender : "Please update your gender."}

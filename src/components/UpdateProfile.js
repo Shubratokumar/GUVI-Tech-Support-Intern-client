@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import "./../styles/auth.css"
 import { useNavigate } from 'react-router-dom';
+import auth from '../firebase.init';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const UpdateProfile = () => {
+    const [user] = useAuthState(auth);
+    const { email } = user;
     const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
     const [gender, setGender] = useState("");
     const [dob, setDoB] = useState("");
     const [age, setAge] = useState("");
@@ -13,9 +16,6 @@ const UpdateProfile = () => {
 
     const handleNameBlur = (e) =>{
         setName(e.target.value);
-    };
-    const handleEmailBlur = (e) => {
-        setEmail(e.target.value);
     };
     const handleGenderBlur = (e) => {
         setGender(e.target.value);
@@ -30,9 +30,29 @@ const UpdateProfile = () => {
         setPhone(e.target.value);
     }; 
 
-    const handleProfileUpdate = (event) => {
-        event.preventDefault();
-        navigate("/");
+    const handleProfileUpdate = (e) => {
+        const updateProfile = {
+            name,
+            gender,
+            dob,
+            age,
+            phone
+        };
+        fetch(`http://localhost:5000/user/${email}`, {
+                method: "PUT",
+                headers: {
+                "content-type": "application/json",
+            },
+                body: JSON.stringify(updateProfile),
+            })
+            .then((res) => res.json())
+            .then((result) => {
+                if (result.matchedCount > 0) {
+                    navigate("/");
+                }
+            });
+
+        e.preventDefault();        
     }
     return (
         <div className="form-container">
@@ -54,9 +74,9 @@ const UpdateProfile = () => {
             <label htmlFor="email">Email</label>
             <div>
               <input
-                onBlur={handleEmailBlur}
                 type="email"
                 name="email"
+                value={email}
                 required
               />
             </div>
