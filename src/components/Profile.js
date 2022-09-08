@@ -1,6 +1,10 @@
 import React from 'react';
 import { Box, Container, Typography, Button, Divider, styled } from '@mui/material';
 import { Link } from 'react-router-dom';
+import auth from '../firebase.init';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from "react-query";
+import Loader from './Loader';
 
 const ProfileWrapper = styled(Box)`
     margin: 20px 0;
@@ -37,6 +41,20 @@ const UpdateButton = styled(Button)`
 `;
 
 const Profile = () => {
+    const [user] = useAuthState(auth);
+    const { email } = user;
+    const {
+        data,
+        isLoading
+        } = useQuery("user", () =>
+        fetch(`http://localhost:5000/user/${email}`).then((res) => res.json())
+        );
+        console.log(data);
+
+        if(isLoading){
+            return <Loader />
+          }
+
     return (
         <section>
             <Container maxWidth="sm">
@@ -47,22 +65,22 @@ const Profile = () => {
                     <Divider />
                     <ProfileContainer>
                         <ProfileInfoText> 
-                            Name : Shubrato Kumar
+                            Name : { data.name ? data.name : "Please update your name."}
                         </ProfileInfoText>
                         <ProfileInfoText> 
-                            Email : shubrato@gmail.com
+                            Email : { data.email ? data.email : email }
                         </ProfileInfoText>
                         <ProfileInfoText> 
-                            Gender : Male
+                            Gender : {data.gender ? data.gender : "Please update your gender."}
                         </ProfileInfoText>
                         <ProfileInfoText> 
-                            DOB : 10/12/96
+                            DoB : {data.dob ? data.dob : "Please update your DoB."}
                         </ProfileInfoText>
                         <ProfileInfoText> 
-                            Age : 25
+                            Age : {data.age ? data.age : "Please update your age."}
                         </ProfileInfoText>
                         <ProfileInfoText> 
-                            Phone : 01762813923
+                            Phone : {data.phone ? data.phone : "Please update your contact number."}
                         </ProfileInfoText>
                         <UpdateButton>                            
                             <Link  to="/updateProfile">
