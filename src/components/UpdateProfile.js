@@ -38,11 +38,11 @@ const UpdateProfile = () => {
             age,
             phone
         };
-        fetch(`http://localhost:5000/user/${email}`, {
+        fetch(`https://infinite-shelf-47882.herokuapp.com/${email}`, {
                 method: "PUT",
                 headers: {
                 "content-type": "application/json",
-            },
+                },
                 body: JSON.stringify(updateProfile),
             })
             .then((res) => res.json())
