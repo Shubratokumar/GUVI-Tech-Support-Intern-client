@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from './../firebase.init';
 import "../styles/auth.css";
+import toast from 'react-hot-toast';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -29,8 +30,11 @@ const Login = () => {
 
     const handleUserSignIn = event =>{
         event.preventDefault();
-        signInWithEmailAndPassword(email, password);
-        navigate("/");
+        if(email && password){
+            signInWithEmailAndPassword(email, password);
+            navigate("/");
+        }
+        toast.success(" Logged in Successfully !!!");
     }
 
     return (

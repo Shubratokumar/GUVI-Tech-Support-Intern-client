@@ -5,6 +5,7 @@ import { signOut } from 'firebase/auth';
 import auth from './../firebase.init';
 import { Link } from 'react-router-dom';
 import guviLogo from "../assets/images/guvi-logo.png";
+import { toast } from 'react-hot-toast';
 
 
 const Headeing = styled(Grid)(({theme})=>({
@@ -37,6 +38,13 @@ const Header = () => {
     const [user] = useAuthState(auth);
     const handleSignOut = () => {
       signOut(auth);
+      toast.success("Successfully Logout!!!", {
+        duration: 3000,
+        style: {
+          background: "black",
+          color: "white",
+        },
+      });
     };
     return (
         <Headeing>

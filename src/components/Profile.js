@@ -64,22 +64,22 @@ const Profile = () => {
                     <Divider />
                     <ProfileContainer>
                         <ProfileInfoText> 
-                            Name : { data.name ? data.name : "Please update your name."}
+                            Name : { data?.name ? data?.name : "Please update your name."}
                         </ProfileInfoText>
                         <ProfileInfoText> 
                             Email : { email }
                         </ProfileInfoText>
                         <ProfileInfoText> 
-                            Gender : {data.gender ? data.gender : "Please update your gender."}
+                            Gender : {data?.gender ? data?.gender : "Please update your gender."}
                         </ProfileInfoText>
                         <ProfileInfoText> 
-                            DoB : {data.dob ? data.dob : "Please update your DoB."}
+                            DoB : {data?.dob ? data?.dob : "Please update your DoB."}
                         </ProfileInfoText>
                         <ProfileInfoText> 
-                            Age : {data.age ? data.age : "Please update your age."}
+                            Age : {data?.age ? data?.age : "Please update your age."}
                         </ProfileInfoText>
                         <ProfileInfoText> 
-                            Phone : {data.phone ? data.phone : "Please update your contact number."}
+                            Phone : {data?.phone ? data?.phone : "Please update your contact number."}
                         </ProfileInfoText>
                         <UpdateButton>                            
                             <Link  to="/updateProfile">
